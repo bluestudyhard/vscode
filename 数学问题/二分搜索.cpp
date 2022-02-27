@@ -1,85 +1,35 @@
 #include <bits/stdc++.h>
 using namespace std;
 int main()
+int binarysearch(int a[],int key,int n)//二分搜索原理
 {
-    int n, x, mid, i, flag = 1, a[100];
-    cin >> n >> x;
-    int left = 0, right = n - 1;
-    for (i = 0; i < n; i++)
-        cin >> a[i];
-    mid = (left + right) / 2;
-    for (int i = 0; i < n - 1; i++)
-    {
-        if (a[i] >= a[i + 1])
-        {
-            printf("Invalid Value");
-            flag = 0;
-            break;
-        }
-    }
-    if (flag)
-    {
-        printf("[%d,%d][%d]\n", left, right, mid);
-        while (left <= right)
-        {
-            if (a[mid] == x)
-            {
-                cout << mid;
-                break;
-            }
-            else if (a[mid] > x)
-            {
-                right = mid - 1;
-                mid = (left + right) / 2;
-                printf("[%d,%d][%d]\n", left, right, mid);
-            }
-            else if (a[mid] < x)
-            {
-                left = mid + 1;
-                mid = (left + right) / 2;
-                printf("[%d,%d][%d]\n", left, right, mid);
-            }
-            if (left == 0 && right == 0 && mid == 0)
-            {
-                cout << "Not Found";
-                break;
-            }
-        }
-    }
+     int left = 0;
+     int right = n;
+     int mid = (left+right/2)
+     if(key == a[mid])
+       return mid;
+      else if (a[mid]>key)
+        right = mid;
+      else
+      left = mid+1;
 }
-#include<stdio.h>
-int BinSearch(int a[],int n,int x){
-	int left=0,right=n-1,mid;
-	while(left<=right){
-		mid=(left+right)/2;
-		printf("[%d,%d][%d]\n",left,right,mid);
-		if(a[mid]==x)
-			return mid;
-		else if(a[mid]<x) left=mid+1;
-		else right=mid-1;
-	}
-	return -1;
-}
-
+#include <bits/stdc++.h>
+using namespace std;
 int main()
-{
-	int n,x,flag=1,ans;
-	scanf("%d%d",&n,&x);
-	int a[n];
-	for(int i=0;i<n;i++){
-		scanf("%d",&a[i]);
-	}
-	for(int i=0;i<n-1;i++){
-		if(a[i]>=a[i+1]){
-			printf("Invalid Value");
-			flag=0;
-			break;
-		}
-	}
-	if(flag){
-		ans=BinSearch(a,n,x);
-		if(ans==-1) printf("Not Found");
-		else printf("%d",ans);
-	}
-	return 0;
+{   //lower_bound 返回值为一个指针，所以减去数组的指针就是一个int变量了
+    //lower_bound 返回在区间中检索的第一个小于或！！！！（等于）！！！idx的位置。
+    //lower_bound 还自带去重
+    int n,a[11]={1,2,3,4,5,6,7,8,9};
+    //lower_bound （数组名，数组名加你要检索的长度，idx检索数）-数组；
+    int *pos3 = lower_bound(a,a+9,3);
+    int pos = lower_bound(a,a+9,3)-a;
+     cout<<*pos3<<endl<<pos;
+    //upper_bound同理
+    int pos1 = upper_bound(a,a+9,10)-a;
+    int pos2 = upper_bound(a,a+9,3)-a;
+    cout<<" "<<pos1<<" "<<pos2<<endl;
+
+    //stl binary_search() 二分查找，找到就返回1，找不到返回0
+    int indx = binary_search(a,a+9,2);
+    cout<<indx;
 }
